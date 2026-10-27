@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minha Casa, Minha Vida — Curitiba &amp; Região Metropolitana</title>
+<style>
+  :root{
+    --bg:#fbf7f4; --bg2:#ffffff; --ink:#1e1b1a; --ink2:#5e5854; --line:#e8ded6;
+    --accent:#b4553f; --accent-soft:#fdeee8; --accent2:#2f6f5e; --accent2-soft:#e6f2ed;
+    --gold:#a8802c; --shadow:0 1px 2px rgba(30,27,26,.05), 0 8px 24px -12px rgba(30,27,26,.18);
+    --radius:18px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#161310; --bg2:#1f1a17; --ink:#f4ece6; --ink2:#b3a79f; --line:#332b26;
+      --accent:#e0866c; --accent-soft:#33211b; --accent2:#7fc3ad; --accent2-soft:#1b2e28;
+      --gold:#d9b063; --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding-inline:22px; padding-block:0}
+  h1,h2,h3,.ui{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+
+  /* HERO */
+  header.hero{
+    position:relative; overflow:hidden; border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(900px 420px at 12% -10%, var(--accent-soft), transparent 65%),
+      radial-gradient(700px 400px at 92% 0%, var(--accent2-soft), transparent 60%),
+      var(--bg2);
+  }
+  header.hero .wrap{padding-block:64px 54px}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:9px; font-size:12.5px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 18px;
+  }
+  .eyebrow::before{content:""; width:26px; height:1.5px; background:var(--accent); display:block}
+  .eyebrow.dedica{text-transform:none; letter-spacing:0; font-size:14.5px; font-weight:600}
+  .eyebrow.dedica::before{display:none}
+  .dedic{margin:18px 0 0; font-style:italic; color:var(--accent); font-size:16.5px}
+  h1{font-size:clamp(34px,6.2vw,58px); line-height:1.05; margin:0 0 18px; letter-spacing:-.022em; font-weight:800}
+  h1 em{font-style:normal; color:var(--accent); position:relative;}
+  .lede{font-size:clamp(17px,2.2vw,20px); color:var(--ink2); max-width:56ch; margin:0}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px}
+  .pill{
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:13px; font-weight:600;
+    padding:7px 14px; border-radius:999px; background:var(--bg); border:1px solid var(--line); color:var(--ink2);
+  }
+  .pill.hot{background:var(--accent-soft); border-color:transparent; color:var(--accent)}
+
+  /* SECTIONS */
+  section{padding-block:56px}
+  section + section{border-top:1px solid var(--line)}
+  h2{font-size:clamp(23px,3.4vw,31px); letter-spacing:-.02em; margin:0 0 8px; font-weight:750}
+  .sub{color:var(--ink2); margin:0 0 30px; max-width:62ch}
+
+  /* FAIXAS */
+  .faixas{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:14px}
+  .faixa{
+    background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px 20px 18px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+  }
+  .faixa::before{content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--accent); opacity:.75}
+  .faixa:nth-child(2)::before{background:var(--gold)}
+  .faixa:nth-child(3)::before{background:var(--accent2)}
+  .faixa:nth-child(4)::before{background:#6a6fb0}
+  .faixa h3{margin:0 0 4px; font-size:15px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink2); font-weight:700}
+  .faixa .val{font-size:24px; font-weight:800; letter-spacing:-.02em; font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .faixa ul{margin:12px 0 0; padding:0; list-style:none; font-size:14.5px; color:var(--ink2)}
+  .faixa li{padding:4px 0 4px 16px; position:relative}
+  .faixa li::before{content:"›"; position:absolute; left:0; color:var(--accent); font-weight:700}
+
+  /* DESTAQUE */
+  .callout{
+    background:linear-gradient(135deg,var(--accent2-soft),transparent 70%), var(--bg2);
+    border:1px solid var(--line); border-radius:var(--radius); padding:26px 28px; box-shadow:var(--shadow);
+    display:flex; gap:22px; align-items:flex-start; flex-wrap:wrap;
+  }
+  .callout .big{font-size:40px; font-weight:800; color:var(--accent2); line-height:1;
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; letter-spacing:-.03em}
+  .callout div{flex:1 1 320px}
+  .callout h3{margin:0 0 6px; font-size:19px}
+  .callout p{margin:0; color:var(--ink2); font-size:15px}
+
+  /* FILTROS */
+  .filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px}
+  .filters button{
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; cursor:pointer;
+    font-size:13.5px; font-weight:600; padding:8px 16px; border-radius:999px;
+    border:1px solid var(--line); background:var(--bg2); color:var(--ink2); transition:.16s;
+  }
+  .filters button:hover{border-color:var(--accent); color:var(--accent)}
+  .filters button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+
+  /* CARDS */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px}
+  .card{
+    background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 22px 20px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:12px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card[hidden]{display:none}
+  .card:hover{transform:translateY(-3px); box-shadow:0 2px 4px rgba(30,27,26,.06), 0 18px 36px -18px rgba(30,27,26,.35)}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px}
+  .card h3{margin:0; font-size:19px; letter-spacing:-.012em; line-height:1.25}
+  .badge{
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:.08em; text-transform:uppercase; padding:5px 10px; border-radius:8px; white-space:nowrap;
+    background:var(--accent-soft); color:var(--accent);
+  }
+  .badge.obra{background:var(--accent2-soft); color:var(--accent2)}
+  .badge.pronto{background:rgba(168,128,44,.14); color:var(--gold)}
+  .badge.off{background:var(--bg); border:1px solid var(--line); color:var(--ink2)}
+  .card.off{opacity:.62}
+  .card.off:hover{opacity:1}
+  .where{font-size:14px; color:var(--ink2); margin:-6px 0 0; display:flex; align-items:center; gap:6px}
+  .specs{display:flex; flex-wrap:wrap; gap:6px}
+  .spec{
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:12.5px;
+    background:var(--bg); border:1px solid var(--line); border-radius:7px; padding:4px 9px; color:var(--ink2);
+  }
+  .card p.desc{margin:0; font-size:14.5px; color:var(--ink2)}
+  .card .links{margin:0; display:flex; flex-direction:column; gap:6px}
+  .card .links a{
+    font-size:13.5px; color:var(--accent); text-decoration:none;
+    border-bottom:1px solid transparent; align-self:flex-start;
+  }
+  .card .links a:hover{border-bottom-color:var(--accent)}
+  .price{margin-top:auto; padding-top:12px; border-top:1px dashed var(--line);
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .price small{display:block; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink2)}
+  .price b{font-size:21px; font-weight:800; letter-spacing:-.02em}
+  .price b.na{font-size:15px; font-weight:600; color:var(--ink2)}
+
+  /* TABELA */
+  .tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--bg2); box-shadow:var(--shadow)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:560px}
+  th,td{padding:13px 18px; text-align:left; border-bottom:1px solid var(--line)}
+  th{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:11.5px; letter-spacing:.1em;
+     text-transform:uppercase; color:var(--ink2); font-weight:700; background:var(--bg)}
+  tr:last-child td{border-bottom:0}
+
+  /* CHECKLIST */
+  ol.steps{counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:14px}
+  ol.steps li{
+    counter-increment:s; position:relative; padding:16px 18px 16px 62px;
+    background:var(--bg2); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+  }
+  ol.steps li::before{
+    content:counter(s); position:absolute; left:18px; top:16px; width:28px; height:28px;
+    display:grid; place-items:center; border-radius:9px; background:var(--accent); color:#fff;
+    font-family:ui-sans-serif,-apple-system,sans-serif; font-weight:800; font-size:14px;
+  }
+  ol.steps strong{display:block; font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:15.5px}
+  ol.steps span{color:var(--ink2); font-size:14.5px}
+
+  .note{
+    margin-top:26px; padding:16px 18px; border-left:3px solid var(--gold);
+    background:rgba(168,128,44,.08); border-radius:0 12px 12px 0; font-size:14.5px; color:var(--ink2);
+  }
+  footer{border-top:1px solid var(--line); background:var(--bg2)}
+  footer .wrap{padding-block:34px 46px}
+  footer p{font-size:13.5px; color:var(--ink2); margin:0 0 10px}
+  footer a{color:var(--accent); text-decoration:none; border-bottom:1px solid transparent}
+  footer a:hover{border-bottom-color:var(--accent)}
+  .srcs{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:4px 24px; font-size:13.5px; margin-top:6px}
+  .heart{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow dedica">Amor. Amoooorr. Amorzinho. Amoooooziiiiinhhhooooo. - refiz a parada dia 27/10/2026</p>
+    <h1>Minha Casa, Minha Vida<br>em <em>Curitiba</em> e região</h1>
+    <p class="lede">Um mapa dos empreendimentos enquadrados no programa na capital e nos municípios vizinhos — com as regras novas de 2026, o subsídio estadual e o caminho das pedras para sair do aluguel.</p>
+    <p class="dedic">Para a Princesa Koala.</p>
+    <div class="hero-meta">
+      <span class="pill hot">Faixa 4 vale até R$ 13.000 de renda</span>
+      <span class="pill">Imóveis de até R$ 600 mil</span>
+      <span class="pill">Juros a partir de 4,25% a.a.</span>
+      <span class="pill">+ R$ 20 mil do Casa Fácil Paraná</span>
+      <span class="pill hot">R$ 80 mil de entrada para quem tem 60+</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2>As regras que valem agora</h2>
+  <p class="sub">Valores da <strong>Portaria MCID nº 333</strong>, de 30/03/2026, publicada no Diário Oficial em 01/04/2026. Ela elevou os limites de renda de todas as faixas e os tetos das Faixas 3 e 4 — a tabela que circulava antes dela, com corte em R$ 2.850, R$ 4.700 e R$ 8.000, está vencida.</p>
+  <div class="faixas">
+    <div class="faixa">
+      <h3>Faixa 1</h3>
+      <div class="val">até R$ 3.200</div>
+      <ul>
+        <li>Subsídio de até 95% do valor</li>
+        <li>Menores juros do programa</li>
+        <li>Imóvel entre R$ 210 mil e R$ 275 mil</li>
+      </ul>
+    </div>
+    <div class="faixa">
+      <h3>Faixa 2</h3>
+      <div class="val">R$ 3.200–5.000</div>
+      <ul>
+        <li>Subsídio direto na entrada</li>
+        <li>Financia até 80% do imóvel</li>
+        <li>Imóvel entre R$ 210 mil e R$ 275 mil</li>
+      </ul>
+    </div>
+    <div class="faixa">
+      <h3>Faixa 3</h3>
+      <div class="val">R$ 5.000–9.600</div>
+      <ul>
+        <li>Sem subsídio, mas juros reduzidos</li>
+        <li>Financia até 80% do imóvel</li>
+        <li>Imóvel de até R$ 400 mil <em>(era R$ 350 mil)</em></li>
+      </ul>
+    </div>
+    <div class="faixa">
+      <h3>Faixa 4 · nova</h3>
+      <div class="val">R$ 9.600–13.000</div>
+      <ul>
+        <li>Juros ~10% a.a., abaixo do mercado</li>
+        <li>Financia de 60% a 70%</li>
+        <li>Imóvel de até R$ 600 mil <em>(era R$ 500 mil)</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:22px">
+    <div class="big">R$ 20 mil</div>
+    <div>
+      <h3>Casa Fácil Paraná — o bônus que quase ninguém lembra</h3>
+      <p>O Governo do Paraná, via Cohapar, deposita até R$ 20 mil direto no banco para abater a entrada, para famílias com renda de até 4 salários mínimos. Vale só em empreendimentos habilitados — e boa parte dos residenciais desta lista está. Exige cadastro prévio no <em>Cadastro de Pretendentes</em> da Cohapar. Acumula com os descontos do MCMV e com o FGTS.</p>
+      <p style="margin-top:10px"><strong>E tem uma porta maior:</strong> na modalidade <em>Valor de Entrada — Terceira Idade</em>, o subsídio sobe para <strong>R$ 80 mil</strong> quando o pretendente tem 60 anos ou mais. As fichas da Cohapar para o Campobello e o Recanto Provence já trazem os dois valores lado a lado. O material do Estado ora fala em 60 anos ou mais, ora na faixa de 60 a 70 anos — cabe ao pretendente confirmar a regra vigente antes de contar com ela.</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:18px">
+    <div class="big">3ª via</div>
+    <div>
+      <h3>Casa Curitibana — o caminho que só vale na capital</h3>
+      <p>A Cohab Curitiba convoca pela sua própria fila, com isenção de ITBI e subsídio municipal por cima do MCMV, para renda a partir de cerca de R$ 2,7 mil. Dois empreendimentos desta lista saíram por esse canal: o <strong>Ideale Horizontes</strong>, no Novo Mundo, e o <strong>Estação Bordignon</strong>, no Uberaba. A fila passou de 57 mil inscritos em julho de 2026 — quem não está inscrito não é chamado, por mais que se encaixe no perfil.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Os empreendimentos</h2>
+  <p class="sub">Levantamento a partir dos portais das construtoras, da Cohapar, da Cohab e da imprensa local, reconferido em 27/10/2026. Os cards esmaecidos, no fim da lista, são os que <strong>saíram de oferta</strong> desde setembro — ficam à vista de propósito, para que o leitor não refaça a busca já feita.</p>
+
+  <div class="filters" id="filters">
+    <button aria-pressed="true" data-f="all">Tudo</button>
+    <button aria-pressed="false" data-f="Curitiba">Curitiba</button>
+    <button aria-pressed="false" data-f="Almirante Tamandaré">Alm. Tamandaré</button>
+    <button aria-pressed="false" data-f="São José dos Pinhais">S. J. dos Pinhais</button>
+    <button aria-pressed="false" data-f="Colombo">Colombo</button>
+    <button aria-pressed="false" data-f="Pinhais">Pinhais</button>
+    <button aria-pressed="false" data-f="Fazenda Rio Grande">Fazenda Rio Grande</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Hauer 4You</h3><span class="badge">Pride</span></div>
+      <p class="where">📍 Hauer, Curitiba</p>
+      <div class="specs"><span class="spec">1 e 2 dorm · 24–39 m²</span><span class="spec">100% MCMV</span><span class="spec">Casa Fácil PR</span></div>
+      <p class="desc">Novidade desde o levantamento de setembro: a própria Pride o descreve como empreendimento 100% enquadrado no programa, e a imprensa do setor o trata como o maior MCMV que a construtora já lançou no Paraná. Lazer ao ar livre — fitness externo, quadra de areia, espaço gourmet. Entrega prevista só para 2029/2030, então é compra de planta longa.</p>
+      <div class="price"><small>Anunciado a partir de</small><b>R$ 271.000</b></div>
+      <p class="links"><a href="https://www.construtorapride.com.br/empreendimentos/hauer-4you" target="_blank" rel="noopener">Pride — página do empreendimento <span aria-hidden="true">↗</span></a><a href="https://apto.vc/br/pr/curitiba/hauer/hauer-4you" target="_blank" rel="noopener">Apto.vc — ficha de terceiro com plantas e preço <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Residencial Cortese</h3><span class="badge">MRV</span></div>
+      <p class="where">📍 Neoville, Curitiba</p>
+      <div class="specs"><span class="spec">2 dormitórios</span><span class="spec">Opção de área privativa</span><span class="spec">Selo MCMV</span></div>
+      <p class="desc">Lançamento que entrou no lugar dos antigos MCMV da MRV na capital. Neoville tem acesso por Contorno Sul, João Dembinski e João Bettega, com Shopping Palladium e Neoville Center Mall por perto. Salão de festas, espaço piquenique e playground.</p>
+      <div class="price"><small>A partir de</small><b class="na">Consultar — a MRV não abre tabela no site</b></div>
+      <p class="links"><a href="https://www.mrv.com.br/imoveis/parana/curitiba/apartamentos-residencial-cortese" target="_blank" rel="noopener">MRV — página do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Colina das Castanheiras</h3><span class="badge">MRV</span></div>
+      <p class="where">📍 Neoville, Curitiba</p>
+      <div class="specs"><span class="spec">2 dormitórios</span><span class="spec">Opção de sacada</span><span class="spec">Selo MCMV</span></div>
+      <p class="desc">Pré-lançamento, vizinho do Cortese. Entrar na lista antes da abertura de vendas costuma garantir a primeira tabela, que é a melhor — mas pré-lançamento também significa prazo de obra inteiro pela frente.</p>
+      <div class="price"><small>Status</small><b class="na">Pré-lançamento — vale se cadastrar</b></div>
+      <p class="links"><a href="https://www.mrv.com.br/imoveis/parana/curitiba/apartamentos-colina-das-castanheiras" target="_blank" rel="noopener">MRV — página do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Elevato Andaluz</h3><span class="badge">Tenda</span></div>
+      <p class="where">📍 Prado Velho, Curitiba</p>
+      <div class="specs"><span class="spec">2 dormitórios</span><span class="spec">Varanda e churrasqueira</span><span class="spec">Renda a partir de R$ 5.000</span></div>
+      <p class="desc">Duas torres de 15 andares, perto da Linha Verde, da Av. Marechal Floriano e da PUCPR. É um dos dois únicos empreendimentos que a Tenda ainda vende no Paraná — e o preço caiu: em setembro era R$ 343.924. Obras ainda não iniciadas.</p>
+      <div class="price"><small>A partir de</small><b>R$ 299.000</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr/curitiba/elevato-andaluz" target="_blank" rel="noopener">Tenda — página do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Estação Bordignon</h3><span class="badge obra">Tenda · Cohab</span></div>
+      <p class="where">📍 Uberaba, Curitiba · 360 apartamentos</p>
+      <div class="specs"><span class="spec">2 dormitórios</span><span class="spec">Opção de varanda</span><span class="spec">Renda a partir de R$ 2.300</span></div>
+      <p class="desc">O melhor preço de Curitiba nesta lista, e com a menor exigência de renda. Parceria da Tenda com a Cohab dentro do Casa Curitibana — ou seja, a convocação passa pela fila da Cohab. A poucos metros da Av. das Torres. Obra em terraplenagem.</p>
+      <div class="price"><small>A partir de</small><b>R$ 240.000</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr/curitiba/estacao-bordignon" target="_blank" rel="noopener">Tenda — página do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Residencial Campobello</h3><span class="badge obra">MRV · Cohapar</span></div>
+      <p class="where">📍 Curitiba · 368 apartamentos</p>
+      <div class="specs"><span class="spec">A partir de 38 m²</span><span class="spec">Casa Fácil PR</span><span class="spec">R$ 80 mil para 60+</span></div>
+      <p class="desc">Segue comercializando pela Cohapar, que agora abre o preço — e traz os dois subsídios estaduais na mesma ficha: R$ 20 mil de entrada até 4 salários mínimos, R$ 80 mil para quem tem 60 anos ou mais. Vale notar que a MRV deixou de listá-lo no próprio site; a porta de entrada hoje é a Cohapar.</p>
+      <div class="price"><small>A partir de</small><b>R$ 350.000</b></div>
+      <p class="links"><a href="https://www.cohapar.pr.gov.br/Curitiba/Campobello" target="_blank" rel="noopener">Cohapar — ficha do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Residencial Cairós</h3><span class="badge obra">MRV · Cohapar</span></div>
+      <p class="where">📍 Curitiba · 408 apartamentos</p>
+      <div class="specs"><span class="spec">A partir de 43 m²</span><span class="spec">Casa Fácil PR</span><span class="spec">FGTS no saldo</span></div>
+      <p class="desc">As maiores plantas entre os habilitados ao Casa Fácil na capital. Mesmo caso do Campobello: saiu do catálogo próprio da MRV, continua à venda pela Cohapar, com subsídio de R$ 20 mil na entrada e abatimento do saldo pelo FGTS.</p>
+      <div class="price"><small>A partir de</small><b>R$ 350.000</b></div>
+      <p class="links"><a href="https://www.cohapar.pr.gov.br/Pagina/Residencial-Cairos" target="_blank" rel="noopener">Cohapar — ficha do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Ideale Horizontes</h3><span class="badge">Cohab · Prestes</span></div>
+      <p class="where">📍 Novo Mundo, Curitiba · 224 apartamentos</p>
+      <div class="specs"><span class="spec">Casa Curitibana</span><span class="spec">ITBI isento</span><span class="spec">Fila da Cohab</span></div>
+      <p class="desc">Empreendimento do Casa Curitibana com a Construtora Prestes, cujos inscritos já começaram a escolher unidade. Não se compra na rua: a convocação vem por e-mail e WhatsApp para quem está na fila da Cohab com perfil de renda compatível.</p>
+      <div class="price"><small>Acesso</small><b class="na">Por convocação — exige inscrição na Cohab</b></div>
+      <p class="links"><a href="https://www.curitiba.pr.gov.br/noticias/inscritos-na-cohab-curitiba-comecam-a-escolher-apartamentos-no-novo-mundo/85108" target="_blank" rel="noopener">Prefeitura de Curitiba — escolha de unidades <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Novo Mundo</h3><span class="badge">Lançamento</span></div>
+      <p class="where">📍 Novo Mundo, Curitiba</p>
+      <div class="specs"><span class="spec">Studio, 1 e 2 dorm</span><span class="spec">18–44 m²</span><span class="spec">Com garagem</span></div>
+      <p class="desc">Preço confirmado na reconferência, e agora com a conta aberta: entrada de R$ 1.500 usando o subsídio Cohapar de R$ 20 mil, 34 mensais de R$ 1.545,55, quatro balões de R$ 10 mil e R$ 266.951,10 financiados. Bairro consolidado, comércio forte, boa ligação de ônibus.</p>
+      <div class="price"><small>2 dorm a partir de</small><b>R$ 371.000</b></div>
+      <p class="links"><a href="https://www.mcmvcuritiba.com.br/" target="_blank" rel="noopener">MCMV Curitiba — tabela e plantas <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Capão Raso</h3><span class="badge off">A reconfirmar</span></div>
+      <p class="where">📍 Capão Raso, Curitiba</p>
+      <div class="specs"><span class="spec">Studio e 2 dorm</span><span class="spec">29–76 m²</span><span class="spec">Com garagem</span></div>
+      <p class="desc">Em setembro era anunciado a R$ 404.500, com a maior variação de metragem do levantamento. Na reconferência de outubro o portal que o divulgava passou a exibir apenas o Novo Mundo — o empreendimento pode ter esgotado ou saído da carteira do anunciante. Quem se interessar deve confirmar por telefone antes de se deslocar.</p>
+      <div class="price"><small>Em setembro, a partir de</small><b class="na">R$ 404.500 — não reconfirmado em 10/2026</b></div>
+      <p class="links"><a href="https://www.mcmvcuritiba.com.br/" target="_blank" rel="noopener">MCMV Curitiba — portal que o anunciava <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Curitiba">
+      <div class="top"><h3>Empreendimentos Incorporare</h3><span class="badge">Incorporare</span></div>
+      <p class="where">📍 Campo Comprido, Curitiba</p>
+      <div class="specs"><span class="spec">Lazer completo</span><span class="spec">MCMV 2026</span><span class="spec">Zona oeste</span></div>
+      <p class="desc">Projetos no Campo Comprido enquadrados nas condições do programa — região valorizada, perto do Parque Barigui e do eixo do Shopping Palladium. A página da incorporadora segue no ar, mas sem ficha por empreendimento: é contato direto.</p>
+      <div class="price"><small>A partir de</small><b class="na">Consultar com a incorporadora</b></div>
+      <p class="links"><a href="https://incorporareempreendimentos.com.br/minha-casa-minha-vida-2026-tudo-que-voce-precisa-saber-para-conquistar-seu-apartamento-em-curitiba/" target="_blank" rel="noopener">Incorporare — guia MCMV 2026 <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Almirante Tamandaré">
+      <div class="top"><h3>Recanto Provence</h3><span class="badge obra">Pride · Cohapar</span></div>
+      <p class="where">📍 Cachoeira, Almirante Tamandaré · 112 aptos</p>
+      <div class="specs"><span class="spec">A partir de 35 m²</span><span class="spec">2 dormitórios</span><span class="spec">R$ 80 mil para 60+</span></div>
+      <p class="desc">O menor preço de entrada entre os empreendimentos com tabela aberta nesta lista. Condomínio pequeno, de 112 unidades, o que costuma significar taxa de condomínio mais baixa. Em obras. A Cohapar informa 35 m² como planta inicial — a Pride divulgava plantas de até 50,85 m²; vale pedir a tabela por unidade.</p>
+      <div class="price"><small>A partir de</small><b>R$ 225.000</b></div>
+      <p class="links"><a href="https://www.construtorapride.com.br/empreendimentos/recanto-provence" target="_blank" rel="noopener">Pride — página do empreendimento <span aria-hidden="true">↗</span></a><a href="https://www.cohapar.pr.gov.br/Almirante-Tamandare/Recanto-Provence2" target="_blank" rel="noopener">Cohapar — ficha com preço e subsídios <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Almirante Tamandaré">
+      <div class="top"><h3>Residencial Monte Carlo</h3><span class="badge obra">Pride</span></div>
+      <p class="where">📍 Almirante Tamandaré · 416 apartamentos</p>
+      <div class="specs"><span class="spec">A partir de 35 m²</span><span class="spec">2 dormitórios</span><span class="spec">3 min do Parque Tanguá</span></div>
+      <p class="desc">O grande trunfo é a localização: a três minutos do Parque Tanguá, já praticamente na divisa com Curitiba, mas com preço de região metropolitana. Segue em obras no catálogo da Pride.</p>
+      <div class="price"><small>A partir de</small><b class="na">Consultar · habilitado Cohapar</b></div>
+      <p class="links"><a href="https://www.construtorapride.com.br/empreendimentos/monte-carlo" target="_blank" rel="noopener">Pride — página do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Almirante Tamandaré">
+      <div class="top"><h3>Residencial Padova</h3><span class="badge pronto">Disponível</span></div>
+      <p class="where">📍 Jardim Campo Verde, Almirante Tamandaré</p>
+      <div class="specs"><span class="spec">Financiável MCMV</span><span class="spec">2 dormitórios</span></div>
+      <p class="desc">Opção adicional no município, com unidades financiáveis pelo programa. Não tem site de construtora; a ficha de terceiro segue no ar. Vale pedir a tabela atualizada antes da visita.</p>
+      <div class="price"><small>A partir de</small><b class="na">Consultar</b></div>
+      <p class="links"><a href="https://loft.com.br/condominio/condominio-residencial-padova-jardim-campo-verde-almirante-tamandare-pr/59YK5SER" target="_blank" rel="noopener">Loft — ficha de terceiro do condomínio <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="São José dos Pinhais">
+      <div class="top"><h3>Residencial Creta</h3><span class="badge obra">Treèle</span></div>
+      <p class="where">📍 Campo Largo da Roseira, S. J. dos Pinhais</p>
+      <div class="specs"><span class="spec">Casas de 2 quartos</span><span class="spec">51,12 a 54,67 m²</span><span class="spec">MCMV + Casa Fácil</span></div>
+      <p class="desc">Atenção: não é apartamento — são <strong>casas</strong> com quintal privativo e churrasqueira, em terrenos de 126 a 262 m². As maiores áreas privativas de toda a lista. A obra avançou desde setembro: fundação 100%, estrutura 84%, revestimentos 76%, acabamentos 46%.</p>
+      <div class="price"><small>A partir de</small><b class="na">Consultar</b></div>
+      <p class="links"><a href="https://treele.com.br/empreendimento/residencial-creta/" target="_blank" rel="noopener">Treèle — página do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="São José dos Pinhais">
+      <div class="top"><h3>Residencial Málaga</h3><span class="badge">Lançamento</span></div>
+      <p class="where">📍 Bom Jesus, São José dos Pinhais</p>
+      <div class="specs"><span class="spec">Apartamentos</span><span class="spec">Bairro central</span></div>
+      <p class="desc">Lançamento no Bom Jesus, bairro central e bem servido de comércio. Sem site de construtora; a ficha de terceiro continua no ar. Vale confrontar a tabela com o teto da faixa em que o comprador se enquadra antes de visitar.</p>
+      <div class="price"><small>A partir de</small><b class="na">Consultar</b></div>
+      <p class="links"><a href="https://jeanramosimoveis.com.br/empreendimentos/edificio-residencial/27-residencial-malaga" target="_blank" rel="noopener">Jean Ramos Imóveis — ficha de terceiro <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card" data-city="Fazenda Rio Grande">
+      <div class="top"><h3>Residencial Mendoza</h3><span class="badge">Pride · Lançamento</span></div>
+      <p class="where">📍 Fazenda Rio Grande</p>
+      <div class="specs"><span class="spec">2 dormitórios</span><span class="spec">Lançamento</span><span class="spec">MCMV</span></div>
+      <p class="desc">O pré-lançamento que em setembro era só "um projeto da Pride" agora tem nome, página e status de lançamento: é o Mendoza, único empreendimento da construtora no município que mais cresce em população na região metropolitana.</p>
+      <div class="price"><small>A partir de</small><b class="na">Consultar — tabela de lançamento</b></div>
+      <p class="links"><a href="https://www.construtorapride.com.br/empreendimentos/mendoza" target="_blank" rel="noopener">Pride — página do empreendimento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="Curitiba">
+      <div class="top"><h3>Fit Marumbi — Fase 2</h3><span class="badge off">100% vendido</span></div>
+      <p class="where">📍 Lindóia, Curitiba</p>
+      <div class="specs"><span class="spec">2 dormitórios</span><span class="spec">38,68 m²</span><span class="spec">Obra em entrega</span></div>
+      <p class="desc">Esgotou entre setembro e outubro. A página da Tenda abre com o aviso de produto esgotado e o selo de 100% vendido. Continua valendo como referência de padrão de acabamento, já que a fase 1 está pronta e visitável.</p>
+      <div class="price"><small>Status</small><b class="na">Esgotado — sem unidades</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr/curitiba/fit-marumbi-fase-2" target="_blank" rel="noopener">Tenda — página com o selo de esgotado <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="Curitiba">
+      <div class="top"><h3>Parque Arvoredo — Fase 1</h3><span class="badge off">100% vendido</span></div>
+      <p class="where">📍 Xaxim, Curitiba</p>
+      <div class="specs"><span class="spec">1 dormitório</span><span class="spec">36,68 m²</span><span class="spec">Obra em entrega</span></div>
+      <p class="desc">Também esgotado. Se houver fase 2 no Xaxim, é o tipo de informação que só aparece no balcão — vale perguntar à Tenda, já que o bairro era o mais bem avaliado da lista em sossego e serviços.</p>
+      <div class="price"><small>Status</small><b class="na">Esgotado — sem unidades</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr/curitiba/parque-arvoredo-f1" target="_blank" rel="noopener">Tenda — página com o selo de esgotado <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="Curitiba">
+      <div class="top"><h3>Chácara das Parreiras I e II</h3><span class="badge off">100% vendido</span></div>
+      <p class="where">📍 Umbará, Curitiba</p>
+      <div class="specs"><span class="spec">1 dormitório</span><span class="spec">38,68 m²</span><span class="spec">Obra em entrega</span></div>
+      <p class="desc">As duas fases esgotaram. Ficam no registro pelos preços, que eram os menores de Curitiba: R$ 159.900 na fase I e R$ 134.503 na fase II — útil como régua do que o Umbará comporta. A reconferência também fixou o bairro, que em setembro estava em branco.</p>
+      <div class="price"><small>Status</small><b class="na">Esgotado — R$ 134.503 a R$ 159.900 no fim</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr/curitiba/chacara-das-parreiras-f1" target="_blank" rel="noopener">Tenda — Fase I, esgotada <span aria-hidden="true">↗</span></a><a href="https://tenda.com/apartamentos-a-venda/pr/curitiba/chacara-das-parreiras-ii-f1" target="_blank" rel="noopener">Tenda — Fase II, esgotada <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="Curitiba">
+      <div class="top"><h3>Ville Provence</h3><span class="badge off">Fora do catálogo</span></div>
+      <p class="where">📍 Santa Cândida, Curitiba</p>
+      <div class="specs"><span class="spec">1 e 2 dorm</span><span class="spec">Zona norte</span></div>
+      <p class="desc">A página saiu do ar e o empreendimento deixou o mapa do site da Tenda. Santa Cândida ainda aparece no filtro de bairros da construtora, o que sugere unidades remanescentes fora de vitrine — pergunta boa para fazer na loja.</p>
+      <div class="price"><small>Status</small><b class="na">Página removida pela construtora</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr" target="_blank" rel="noopener">Tenda — listagem do Paraná (o empreendimento não consta mais) <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="Curitiba">
+      <div class="top"><h3>Cores de Outono</h3><span class="badge off">Fora do catálogo</span></div>
+      <p class="where">📍 Curitiba · 640 apartamentos em 10 torres</p>
+      <div class="specs"><span class="spec">Com elevador</span><span class="spec">2 dormitórios</span></div>
+      <p class="desc">Era o maior da lista em número de unidades. A MRV não o lista mais em Curitiba — hoje a construtora mantém na capital só dois MCMV no Neoville, além da linha Sensia, que é outro patamar de preço. Já em setembro ele não tinha página própria.</p>
+      <div class="price"><small>Status</small><b class="na">Saiu do catálogo da MRV</b></div>
+      <p class="links"><a href="https://www.mrv.com.br/imoveis/parana/curitiba" target="_blank" rel="noopener">MRV — imóveis em Curitiba (não consta mais) <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="São José dos Pinhais">
+      <div class="top"><h3>Reserva dos Pinhais</h3><span class="badge off">Fora do catálogo</span></div>
+      <p class="where">📍 Colônia Rio Grande, S. J. dos Pinhais · 432 unidades</p>
+      <div class="specs"><span class="spec">1 e 2 dorm</span><span class="spec">A partir de 38,68 m²</span></div>
+      <p class="desc">A baixa mais sentida: era o menor ticket de toda a pesquisa, anunciado a partir de R$ 128 mil na largada. A página saiu do ar e a Tenda não tem mais nenhum empreendimento em São José dos Pinhais.</p>
+      <div class="price"><small>Status</small><b class="na">Página removida — era R$ 128.000</b></div>
+      <p class="links"><a href="https://revistahaus.com.br/sem-categoria/tenda-lanca-reserva-dos-pinhais-apartamentos-128-mil/" target="_blank" rel="noopener">Revista Haus — reportagem do lançamento <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="São José dos Pinhais">
+      <div class="top"><h3>Villagio di Parma</h3><span class="badge off">Fora do catálogo</span></div>
+      <p class="where">📍 São José dos Pinhais</p>
+      <div class="specs"><span class="spec">1 e 2 dorm</span><span class="spec">Entrada em 48x</span></div>
+      <p class="desc">Página fora do ar. Com ele e o Reserva dos Pinhais, a Tenda zerou a presença em São José dos Pinhais — o município perdeu, de uma vez, as duas opções mais baratas do levantamento.</p>
+      <div class="price"><small>Status</small><b class="na">Página removida pela construtora</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr" target="_blank" rel="noopener">Tenda — listagem do Paraná (não consta mais) <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="Colombo">
+      <div class="top"><h3>Moradas do Planalto</h3><span class="badge off">Fora do catálogo</span></div>
+      <p class="where">📍 São Gabriel, Colombo</p>
+      <div class="specs"><span class="spec">1 e 2 dorm</span><span class="spec">Condomínio fechado</span></div>
+      <p class="desc">Era a única opção mapeada em Colombo, e a página saiu do ar — a Tenda não tem mais nada no município. São Gabriel segue sendo o vetor de crescimento da cidade, com acesso à Rodovia da Uva e ligação rápida ao Atuba; vale vigiar por lançamento novo.</p>
+      <div class="price"><small>Status</small><b class="na">Página removida pela construtora</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr" target="_blank" rel="noopener">Tenda — listagem do Paraná (não consta mais) <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+    <article class="card off" data-city="Pinhais">
+      <div class="top"><h3>Parque Bellagio</h3><span class="badge off">Fora do catálogo</span></div>
+      <p class="where">📍 Jardim Cláudia, Pinhais</p>
+      <div class="specs"><span class="spec">1 e 2 dorm</span><span class="spec">Salão de festas</span></div>
+      <p class="desc">Mesma história: página fora do ar, Pinhais sem nenhum empreendimento da Tenda. A cidade fica sem opção nova no levantamento — a Pride tem dois prontos ali, o Barcelona e o Ilha Bela, mas nenhum é lançamento MCMV.</p>
+      <div class="price"><small>Status</small><b class="na">Página removida pela construtora</b></div>
+      <p class="links"><a href="https://tenda.com/apartamentos-a-venda/pr" target="_blank" rel="noopener">Tenda — listagem do Paraná (não consta mais) <span aria-hidden="true">↗</span></a></p>
+    </article>
+
+  </div>
+
+  <div class="note"><strong>Como ler os preços:</strong> vários empreendimentos não divulgam tabela aberta porque o valor final depende da faixa de renda, do subsídio aprovado e da unidade escolhida (andar, posição, vaga). O "consultar" aqui não é falta de informação — é como o mercado trabalha nesse segmento. <strong>O que mudou em 40 dias:</strong> dos 22 empreendimentos de setembro, 9 saíram de oferta — 4 esgotaram e 5 tiveram a página removida. Entraram 4 novos. A Tenda encolheu de 9 empreendimentos no Paraná para 2 ainda vendendo, ambos em Curitiba, e zerou a presença em São José dos Pinhais, Colombo e Pinhais. Em compensação, a Cohapar passou a abrir preço do Campobello, do Cairós e do Recanto Provence, que antes eram "consultar".</div>
+</section>
+
+<section>
+  <h2>Onde o dinheiro rende mais</h2>
+  <p class="sub">Comparativo rápido entre as praças pesquisadas, pensando em quem vai morar e se deslocar todo dia. Faixas de preço refeitas com os valores de outubro — o eixo barato da pesquisa deixou de ser São José dos Pinhais e passou a ser Almirante Tamandaré e o Uberaba.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Cidade / região</th><th>Ticket típico</th><th>O ponto forte</th><th>O que pesar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Curitiba</strong> — Uberaba (Estação Bordignon)</td><td>a partir de R$ 240 mil</td><td>Menor preço e menor renda exigida da capital</td><td>Passa pela fila da Cohab; obra em terraplenagem</td></tr>
+        <tr><td><strong>Curitiba</strong> — Hauer, Prado Velho</td><td>R$ 271 mil – R$ 299 mil</td><td>Endereço central, transporte e serviço na porta</td><td>Metragens de 24 a 39 m²; entrega longa</td></tr>
+        <tr><td><strong>Curitiba</strong> — Campobello, Cairós, Novo Mundo</td><td>R$ 350 mil – R$ 371 mil</td><td>Plantas maiores (38 a 43 m²) e subsídio estadual</td><td>O teto da Faixa 3 (R$ 400 mil) chega perto</td></tr>
+        <tr><td><strong>Almirante Tamandaré</strong></td><td>a partir de R$ 225 mil</td><td>O melhor preço da pesquisa hoje; R$ 20 mil ou R$ 80 mil de entrada pela Cohapar</td><td>Acesso concentrado em poucas vias</td></tr>
+        <tr><td><strong>São José dos Pinhais</strong></td><td>Consultar</td><td>As maiores áreas privativas — o Creta é casa, de 51 a 55 m²</td><td>A Tenda saiu do município; estoque minguou</td></tr>
+        <tr><td><strong>Fazenda Rio Grande</strong></td><td>Lançamento (Mendoza)</td><td>Município que mais cresce em população na RMC</td><td>Infraestrutura ainda amadurecendo</td></tr>
+        <tr><td><strong>Colombo</strong> e <strong>Pinhais</strong></td><td>—</td><td>Pinhais é a mais perto de Curitiba entre as vizinhas</td><td><strong>Sem lançamento MCMV ativo mapeado</strong> em outubro</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>O caminho, na ordem certa</h2>
+  <p class="sub">A parte que a maioria faz fora de ordem — e acaba perdendo subsídio por isso.</p>
+  <ol class="steps">
+    <li><strong>Descobrir em que faixa o comprador cai</strong><span>Renda bruta familiar somada. É ela que define o subsídio, o juro e o teto do imóvel. Vale simular junto e separado: às vezes uma renda só rende mais subsídio.</span></li>
+    <li><strong>Cadastro na Cohapar antes de tudo</strong><span>O Cadastro de Pretendentes é pré-requisito dos R$ 20 mil do Casa Fácil — ou dos R$ 80 mil, se alguém de 60+ for o titular. Feito depois da assinatura, o benefício se perde. Renda até 4 salários mínimos.</span></li>
+    <li><strong>Em Curitiba, entrar também na fila da Cohab</strong><span>É um cadastro separado, do Casa Curitibana, que dá isenção de ITBI e subsídio municipal. Os dois empreendimentos mais baratos da capital nesta lista saem por ele, e a convocação só chega a quem já está inscrito. A fila passou de 57 mil pessoas — entrar cedo é o que conta.</span></li>
+    <li><strong>Simular na Caixa</strong><span>A simulação oficial mostra o valor real de subsídio e a parcela. Quem leva o resultado impresso para a visita negocia de outro lugar.</span></li>
+    <li><strong>Conferir se o residencial é habilitado</strong><span>Nem todo empreendimento aceita o subsídio estadual. A lista oficial fica no site de empreendimentos da Cohapar, por município.</span></li>
+    <li><strong>Visitar em dia de semana e no fim de semana</strong><span>Trânsito, barulho e movimento mudam completamente. O trajeto real até o trabalho merece ser cronometrado no horário de pico, não estimado no mapa.</span></li>
+    <li><strong>Pedir a tabela completa, não só o "a partir de"</strong><span>O menor preço costuma ser o pior andar e a pior posição solar. Cabe exigir valores por unidade, taxa de condomínio prevista e o que exatamente é entregue.</span></li>
+    <li><strong>Reconferir antes de cada rodada de visitas</strong><span>Entre 12 de setembro e 27 de outubro de 2026, nove dos vinte e dois empreendimentos desta lista saíram de oferta. Em MCMV o estoque vira rápido: o interessado confirma por telefone na véspera, não no dia da assinatura.</span></li>
+  </ol>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Fontes consultadas</strong> — pesquisa original de 12 de setembro de 2026, reconferida empreendimento por empreendimento em 27 de outubro de 2026. Valores, disponibilidade e regras mudam; o leitor deve confirmar sempre com a construtora, a Cohapar e a Caixa.</p>
+    <div class="srcs">
+      <a href="https://www.cohapar.pr.gov.br/Casa-Facil">Cohapar — Casa Fácil Paraná</a>
+      <a href="https://www.gov.br/secom/pt-br/acompanhe-a-secom/noticias/2026/04/nova-portaria-atualiza-limites-de-renda-bruta-familiar-admitidos-para-familias-atendidas-pelo-minha-casa-minha-vida">Gov.br — Portaria MCID nº 333/2026 (limites de renda)</a>
+      <a href="https://www.parana.pr.gov.br/Audio/194-idosos-ja-acessaram-valor-de-entrada-de-R-80-mil-do-Estado-para-casa-propria">Governo do PR — entrada de R$ 80 mil para 60+</a>
+      <a href="https://www.construtorapride.com.br/empreendimentos/hauer-4you">Pride — Hauer 4You</a>
+      <a href="https://www.construtorapride.com.br/empreendimentos/mendoza">Pride — Residencial Mendoza</a>
+      <a href="https://www.mrv.com.br/imoveis/parana/curitiba/apartamentos-residencial-cortese">MRV — Residencial Cortese</a>
+      <a href="https://www.mrv.com.br/imoveis/parana/curitiba/apartamentos-colina-das-castanheiras">MRV — Colina das Castanheiras</a>
+      <a href="https://www.curitiba.pr.gov.br/noticias/inscritos-na-cohab-curitiba-comecam-a-escolher-apartamentos-no-novo-mundo/85108">Prefeitura de Curitiba — Cohab no Novo Mundo</a>
+      <a href="https://sindusconpr.com.br/cohab-lanca-novo-edital-para-ampliar-habitacao-de-interesse-social-em-curitiba/">Sinduscon-PR — novo edital da Cohab</a>
+      <a href="https://www.cohapar.pr.gov.br/Curitiba/Campobello">Cohapar — Residencial Campobello</a>
+      <a href="https://www.cohapar.pr.gov.br/Pagina/Residencial-Cairos">Cohapar — Residencial Cairós</a>
+      <a href="https://www.cohapar.pr.gov.br/Almirante-Tamandare/Recanto-Provence2">Cohapar — Recanto Provence</a>
+      <a href="https://tenda.com/apartamentos-a-venda/pr">Tenda — empreendimentos no Paraná</a>
+      <a href="https://tenda.com/apartamentos-a-venda/pr/curitiba/elevato-andaluz">Tenda — Elevato Andaluz</a>
+      <a href="https://revistahaus.com.br/sem-categoria/tenda-lanca-reserva-dos-pinhais-apartamentos-128-mil/">Revista Haus — Reserva dos Pinhais</a>
+      <a href="https://www.construtorapride.com.br/empreendimentos/monte-carlo">Pride — Monte Carlo</a>
+      <a href="https://www.construtorapride.com.br/empreendimentos/recanto-provence">Pride — Recanto Provence</a>
+      <a href="https://treele.com.br/empreendimento/residencial-creta/">Treèle — Residencial Creta</a>
+      <a href="https://www.mcmvcuritiba.com.br/">MCMV Curitiba — tabela de preços</a>
+      <a href="https://incorporareempreendimentos.com.br/minha-casa-minha-vida-2026-tudo-que-voce-precisa-saber-para-conquistar-seu-apartamento-em-curitiba/">Incorporare — MCMV 2026 em Curitiba</a>
+      <a href="https://www.cnnbrasil.com.br/branded-content/economia/negocios/guia-minha-casa-minha-vida-2026-regras-valores-e-quem-pode-participar/">CNN Brasil — guia MCMV 2026</a>
+      <a href="https://www.tenda.com/blog/minha-casa-minha-vida/minha-casa-minha-vida-2026">Tenda — mudanças no MCMV 2026</a>
+      <a href="https://www.bemparana.com.br/noticias/economia/mrv-entrega-256-moradias-em-curitiba-com-apoio-do-casa-facil-e-minha-casa-minha-vida/">Bem Paraná — MRV e Casa Fácil</a>
+      <a href="https://ademipr.com.br/em-2024-mrv-lanca-mais-de-1800-apartamentos-no-parana/">ADEMI-PR — lançamentos MRV</a>
+      <a href="https://www.gazetadopovo.com.br/vozes/parana-sa/feirao-minha-casa-minha-vida-curitiba/">Gazeta do Povo — Feirão MCMV Curitiba</a>
+    </div>
+    <p style="margin-top:22px">Feito com <span class="heart">♥</span> para o meu amor.</p>
+  </div>
+</footer>
+
+<script>
+  const grid = document.getElementById('grid');
+  document.getElementById('filters').addEventListener('click', e => {
+    const btn = e.target.closest('button'); if(!btn) return;
+    document.querySelectorAll('#filters button').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+    const f = btn.dataset.f;
+    grid.querySelectorAll('.card').forEach(c => {
+      c.hidden = !(f === 'all' || c.dataset.city === f);
+    });
+  });
+</script>
+</body>
+</html>
